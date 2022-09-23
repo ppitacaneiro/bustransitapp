@@ -1,0 +1,8 @@
+<div id="buses-cards">
+    <div class="bus-card" *ngFor="let route of routes" (click)="onRouteSelection(route.rt)">
+        <div class="bus-number">
+            <div class="badge" [style.background-color]="route?.rtclr">{{ route?.rtdd }}</div>
+        </div>
+        <div class="route-name">{{ route?.rtnm }}</div>
+    </div>
+</div>

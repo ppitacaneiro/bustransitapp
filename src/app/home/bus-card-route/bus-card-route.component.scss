@@ -1,0 +1,52 @@
+#buses-cards {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.bus-card {
+  width: 45%;
+  height: 150px;
+  background-color: var(--white);
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+}
+
+.bus-card:hover {
+  cursor: pointer;
+  -webkit-box-shadow: inset 0px 0px 10px 5px rgba(120, 120, 120, 1);
+  -moz-box-shadow: inset 0px 0px 10px 5px rgba(120, 120, 120, 1);
+  box-shadow: inset 0px 0px 10px 5px rgba(120, 120, 120, 1);
+}
+
+.route-name {
+  color: var(--darkblue);
+  font-size: 0.9rem;
+  margin: auto;
+  text-transform: uppercase;
+}
+
+.bus-number {
+  margin: auto;
+}
+
+.badge {
+  height: 85px;
+  width: 85px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%; /* may require vendor prefixes */
+  background: var(--darkred);
+  color: var(--white);
+  font-size: 2rem;
+  border: 0px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
