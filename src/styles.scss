@@ -1,1 +1,69 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Exo:wght@200;500&family=Lato:ital,wght@0,300;0,700;1,300&family=Montserrat:wght@100;400;700&family=Oswald:wght@600&display=swap");
+
+:root {
+  --darkblue: #010d26;
+  --blue: #011640;
+  --lightblue: #6d86a6;
+  --darkred: #a60321;
+  --red: #a60303;
+  --white: #ffffff;
+  --primary-font: "Montserrat";
+  --secondary-font: "Oswald";
+  --font-size: 1.3rem;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--primary-font);
+  background-color: var(--darkblue);
+  color: var(--white);
+  font-size: var(--font-size);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+a {
+  color: var(--darkred);
+}
+
+a:hover {
+  color: var(--red);
+  text-decoration: none;
+}
+
+#container {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.btn-primary {
+  background-color: var(--darkblue);
+  color: var(--darkred);
+  border-radius: 5px;
+  border: 1px solid var(--darkred);
+  font-size: 1rem;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.btn-primary:hover {
+  background-color: var(--darkred);
+  color: var(--white);
+  cursor: pointer;
+}
