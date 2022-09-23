@@ -1,0 +1,30 @@
+h2 {
+  background-color: var(--darkred);
+  height: 35px;
+  font-size: 1rem;
+  font-style: normal;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-top: 15px;
+  text-transform: uppercase;
+}
+
+ul {
+  list-style-type: none;
+  height: 25px;
+  font-size: 0.9rem;
+  font-style: normal;
+  text-transform: uppercase;
+
+  li {
+    background-color: var(--blue);
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+
+  li:hover {
+    cursor: pointer;
+    background-color: var(--red);
+    padding: 5px;
+  }
+}

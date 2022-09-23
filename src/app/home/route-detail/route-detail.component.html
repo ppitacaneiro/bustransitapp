@@ -1,0 +1,8 @@
+<div *ngIf="busStops.length">
+    <app-map [busStop]="initialBusStop"></app-map>
+    <app-predictions *ngIf="!isHiddenPredictionComponent"></app-predictions>
+    <h2>Bus Stops</h2>
+    <ul *ngFor="let busStop of busStops">
+        <li (click)="selectBusStop(busStop)">{{ busStop.stpnm }}</li>
+    </ul>
+</div>
