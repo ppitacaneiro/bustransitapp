@@ -9,6 +9,7 @@ import {
   BrowserAnimationsModule,
   NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import {
     HttpClientModule,
     NoopAnimationsModule,
     SharedModule,
+    NgbModule,
   ],
   providers: [
     {

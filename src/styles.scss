@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo:wght@200;500&family=Lato:ital,wght@0,300;0,700;1,300&family=Montserrat:wght@100;400;700&family=Oswald:wght@600&display=swap");
 
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
 :root {
   --darkblue: #010d26;
   --blue: #011640;
