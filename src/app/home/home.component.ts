@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   loadingMessage!: string;
   direction!: string;
   route!: string;
+  hasErrors: boolean = false;
+  errorMessage!: string;
   apiRoutesSuscription!: Subscription;
   apiDirectionsSuscription!: Subscription;
   apiStopsSuscription!: Subscription;
@@ -53,7 +55,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         },
         (error) => {
           this.isLoaded = true;
-          console.log(error);
+          this.hasErrors = true;
+          this.errorMessage = error;
         }
       );
   }
@@ -67,7 +70,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.directions = response['bustime-response'].directions;
         },
         (error) => {
-          console.log(error);
+          this.hasErrors = true;
+          this.errorMessage = error;
         }
       );
   }
@@ -84,7 +88,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         },
         (error) => {
           this.isLoaded = true;
-          console.log(error);
+          this.hasErrors = true;
+          this.errorMessage = error;
         }
       );
   }
