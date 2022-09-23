@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   direction!: string;
   route!: string;
   hasErrors: boolean = false;
+  showRouteDetails: boolean = false;
   errorMessage!: string;
   apiRoutesSuscription!: Subscription;
   apiDirectionsSuscription!: Subscription;
@@ -63,6 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getDirections(rt: string) {
     this.route = rt;
+    this.showRouteDetails = false;
     this.apiDirectionsSuscription = this.busTrackerApiService
       .getDirections(rt)
       .subscribe(
@@ -77,6 +79,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   onDirectionSelected() {
+    this.directions = [];
+    this.showRouteDetails = true;
     this.isLoaded = false;
     this.loadingMessage = 'loading bus stops...';
     this.apiStopsSuscription = this.busTrackerApiService
