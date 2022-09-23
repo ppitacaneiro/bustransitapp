@@ -14,6 +14,6 @@
     </div>
     <div id="route-detail">
         <app-spinner *ngIf="!isLoaded" [message]="loadingMessage"></app-spinner>
-        <app-route-detail></app-route-detail>
+        <app-route-detail *ngIf="showRouteDetails"></app-route-detail>
     </div>
 </div>
