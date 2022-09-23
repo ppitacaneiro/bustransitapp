@@ -1,0 +1,32 @@
+#predictions-wrapper {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 25px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.table-predictions {
+  margin: 10px;
+  width: 100%;
+
+  tr td {
+    color: var(--darkblue);
+    font-size: 1rem;
+    padding: 5px;
+  }
+
+  .legend {
+    background-color: var(--lightblue);
+  }
+}
+
+.prediction-errors {
+  color: var(--red);
+  font-size: 1rem;
+
+  ul {
+    list-style-type: none;
+  }
+}

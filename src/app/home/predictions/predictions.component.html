@@ -1,0 +1,34 @@
+<div id="predictions-wrapper">
+    <app-spinner *ngIf="isLoading"></app-spinner>
+    <div *ngIf="errors.length > 0" class="prediction-errors">
+        <ul>
+            <li *ngFor="let error of errors">{{ error.msg }}</li>
+        </ul>
+    </div>
+    <div *ngIf="predictions.length > 0">
+        <div *ngFor="let prediction of predictions">
+            <table class="table-predictions">
+                <tr>
+                    <td class="legend">Stop</td>
+                    <td>{{ prediction.stpnm }}</td>
+                </tr>
+                <tr>
+                    <td class="legend">Direction of travel</td>
+                    <td>{{ prediction.rtdir }}</td>
+                </tr>
+                <tr>
+                    <td class="legend">Final destination</td>
+                    <td>{{ prediction.des }}</td>
+                </tr>
+                <tr>
+                    <td class="legend">Predicted Hour</td>
+                    <td>{{ prediction.prdtm }}</td>
+                </tr>
+                <tr>
+                    <td class="legend">Time left</td>
+                    <td>{{ prediction.prdctdn }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
