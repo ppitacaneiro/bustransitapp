@@ -21,7 +21,9 @@ export class RouteDetailComponent implements OnInit {
 
   constructor(private busStopsResponseService: BusStopsResponseService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {
     this.busStopsResponseService.selectedBusStops$.subscribe((result) => {
       if (result['bustime-response'].stops.length > 0) {
         this.busStops = result['bustime-response'].stops;
