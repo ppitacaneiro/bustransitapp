@@ -1,0 +1,67 @@
+#header {
+  overflow: hidden;
+  background-color: var(--darkred);
+  position: fixed;
+  top: 0;
+  height: 50px;
+  width: 100%;
+  z-index: 9999;
+}
+
+#clockbar {
+  background-color: var(--lightblue);
+  position: fixed;
+  top: 50;
+  height: 30px;
+  width: 100%;
+}
+
+#clock {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#clock span {
+  font-size: 1rem;
+}
+
+#navbar {
+  position: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#navbar ul {
+  list-style-type: none;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+
+  li a {
+    display: block;
+    padding: 15px 15px;
+    color: var(--white);
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background-color: var(--lightblue);
+  }
+}
+
+.nav-links {
+  display: flex;
+}
+
+.logo {
+  font-size: 1.5rem;
+
+  .title {
+    padding-left: 0.5rem;
+  }
+}
