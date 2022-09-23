@@ -31,17 +31,16 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   constructor(private busStopsResponseService: BusStopsResponseService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.initMap();
     this.busStopsResponseService.selectedBusStop$.subscribe((response) => {
       if (response.stpid !== '') {
         this.newBusStop = response;
         this.createMarker(this.map);
       }
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.initMap();
   }
 
   createMarker(map: any) {
