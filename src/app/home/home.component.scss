@@ -1,0 +1,58 @@
+#main {
+  display: flex;
+}
+
+#buses-list {
+  width: 50%;
+}
+
+#route-detail {
+  margin-top: 10px;
+  width: 50%;
+}
+
+.select-directions {
+  background-color: var(--darkred);
+  width: 95%;
+  padding: 20px;
+  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+
+  label {
+    font-size: 1rem;
+  }
+
+  form {
+    display: flex;
+    flex-flow: row;
+
+    select {
+      padding: 5px;
+      height: 35px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: var(--darkred);
+      border: 1px solid var(--white);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--white);
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: var(--white);
+      color: var(--darkred);
+      cursor: pointer;
+    }
+  }
+}

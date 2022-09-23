@@ -1,0 +1,18 @@
+<div id="main">
+    <div id="buses-list">
+        <div class="select-directions" *ngIf="directions.length">
+            <form #directionForm="ngForm">
+                <label for="direction">Select Direction</label>
+                <select name="direction" [(ngModel)]="direction" id="direction">
+                    <option [value]="direction.dir" *ngFor="let direction of directions">{{ direction.dir }}</option>
+                </select>
+                <button type="button" (click)="onDirectionSelected()">Search</button>
+            </form>
+        </div>
+        <app-bus-card-route [routes]="routes" (onRouteSelected)="getDirections($event)"></app-bus-card-route>
+    </div>
+    <div id="route-detail">
+        <app-spinner *ngIf="!isLoaded" [message]="loadingMessage"></app-spinner>
+        <app-route-detail></app-route-detail>
+    </div>
+</div>
