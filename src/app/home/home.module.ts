@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MapComponent } from './map/map.component';
 import { FormsModule } from '@angular/forms';
 import { PredictionsComponent } from './predictions/predictions.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,12 @@ import { PredictionsComponent } from './predictions/predictions.component';
     MapComponent,
     PredictionsComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule, SharedModule, FormsModule],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    SharedModule,
+    FormsModule,
+    NgbModule,
+  ],
 })
 export class HomeModule {}
