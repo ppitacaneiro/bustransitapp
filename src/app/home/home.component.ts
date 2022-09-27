@@ -38,9 +38,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.apiRoutesSuscription.unsubscribe();
-    this.apiDirectionsSuscription.unsubscribe();
-    this.apiStopsSuscription.unsubscribe();
+    if (this.apiRoutesSuscription) this.apiRoutesSuscription.unsubscribe();
+    if (this.apiDirectionsSuscription)
+      this.apiDirectionsSuscription.unsubscribe();
+    if (this.apiStopsSuscription) this.apiStopsSuscription.unsubscribe();
   }
 
   getAllRoutes() {
