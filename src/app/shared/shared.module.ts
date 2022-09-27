@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { HeaderComponent } from './header/header.component';
 import { NgModule } from '@angular/core';
@@ -7,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [HeaderComponent, SpinnerComponent, SimpleToastComponent],
-  imports: [CommonModule, NgbModule],
+  imports: [CommonModule, NgbModule, RouterModule],
   exports: [HeaderComponent, SpinnerComponent, SimpleToastComponent],
 })
 export class SharedModule {}
