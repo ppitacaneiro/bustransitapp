@@ -9,6 +9,7 @@ import { MapComponent } from './map/map.component';
 import { FormsModule } from '@angular/forms';
 import { PredictionsComponent } from './predictions/predictions.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     FormsModule,
     NgbModule,
+    RouterModule,
   ],
 })
 export class HomeModule {}
