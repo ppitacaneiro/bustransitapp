@@ -10,6 +10,7 @@ import {
   NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NoopAnimationsModule,
     SharedModule,
     NgbModule,
+    RouterModule,
   ],
   providers: [
     {
