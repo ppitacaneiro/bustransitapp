@@ -1,0 +1,23 @@
+<div class="date-info">
+    <h3>{{ monthNames[month] }}</h3>
+    <p>{{ year }}</p>
+</div>
+<div class="btn-container">
+    <button type="button" class="btn-primary" (click)="goToPreviosMonth()">Previous</button>
+    <button type="button" class="btn-primary" (click)="goToNextMonth()">Next</button>
+</div>
+<div class="table-container">
+    <div class="day-label" *ngFor="let day of DAYS_OF_THE_WEEK">{{ day }}</div>
+</div>
+<div class="table-container">
+    <div class="day" *ngFor="let item of daysOfMonth; let index">
+        <div class="number" *ngIf="item.day !== null; else notNumberBlock">
+            <span class="day-label">
+                {{ item.day.dayNumber}}
+            </span>
+        </div>
+        <ng-template #notNumberBlock>
+            <div class="not-number"></div>
+        </ng-template>
+    </div>
+</div>
