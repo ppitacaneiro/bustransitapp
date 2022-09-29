@@ -2,8 +2,9 @@ import { DirectionElement } from './../../interfaces/Direction';
 import { Route } from './../../interfaces/Route';
 import { BusTrackerApiService } from './../../services/bus-tracker-api.service';
 import { BusRouteEvent } from './../../interfaces/BusRouteEvent';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { StopElement } from 'src/app/interfaces/Stop';
+import { OutputFileType } from 'typescript';
 
 @Component({
   selector: 'app-edit-form',
@@ -11,6 +12,7 @@ import { StopElement } from 'src/app/interfaces/Stop';
   styleUrls: ['./edit-form.component.scss'],
 })
 export class EditFormComponent implements OnInit {
+  @Output() busRouteEventEmitter = new EventEmitter();
 
   routes: Route[] = [];
   directions: DirectionElement[] = [];
@@ -76,5 +78,7 @@ export class EditFormComponent implements OnInit {
     );
   }
 
-  save() {}
+  save() {
+    this.busRouteEventEmitter.emit(this.busRouteEvent);
+  }
 }
