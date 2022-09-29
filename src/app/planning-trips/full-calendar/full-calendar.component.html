@@ -11,13 +11,18 @@
 </div>
 <div class="table-container">
     <div class="day" *ngFor="let item of daysOfMonth; let index">
-        <div class="number" *ngIf="item.day !== null; else notNumberBlock">
+        <div class="number" *ngIf="item.day.dayNumber !== 0; else notNumberBlock">
             <span [ngClass]="(item.day.dayNumber == today 
                             && actualMonth == item.day.month 
                             && actualYear == item.day.year) 
                             ? 'day-label-today' : 'day-label'">
                 {{ item.day.dayNumber}}
             </span>
+            <div *ngIf="item.events.length > 0">
+                <span *ngFor="let event of item.events">
+                    <i class="fa-solid fa-bus bus-icon"></i>
+                </span>
+            </div>
         </div>
         <ng-template #notNumberBlock>
             <div class="not-number"></div>
