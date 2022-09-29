@@ -12,7 +12,10 @@
 <div class="table-container">
     <div class="day" *ngFor="let item of daysOfMonth; let index">
         <div class="number" *ngIf="item.day !== null; else notNumberBlock">
-            <span class="day-label">
+            <span [ngClass]="(item.day.dayNumber == today 
+                            && actualMonth == item.day.month 
+                            && actualYear == item.day.year) 
+                            ? 'day-label-today' : 'day-label'">
                 {{ item.day.dayNumber}}
             </span>
         </div>
