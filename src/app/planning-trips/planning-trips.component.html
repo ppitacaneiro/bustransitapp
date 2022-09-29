@@ -1,2 +1,2 @@
-<app-full-calendar></app-full-calendar>
-<app-edit-form></app-edit-form>
+<app-full-calendar [busRouteEvent]="busRouteEvent"></app-full-calendar>
+<app-edit-form (busRouteEventEmitter)="sendBusRouteEvent($event)"></app-edit-form>
