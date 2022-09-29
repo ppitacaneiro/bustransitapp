@@ -1,0 +1,66 @@
+<app-simple-toast [show]="hasErrors" [message]="errorMessage"></app-simple-toast>
+<h3 class="mt-3">Plain your trip</h3>
+<form class="row row-cols-sm-auto mt-3" #f="ngForm">
+    <div class="col-6">
+        <div class="form-group">
+            <label for="bus-routes">Bus Routes</label>
+            <select id="bus-routes" 
+                    class="form-control" 
+                    name="bus-routes" 
+                    [(ngModel)]="busRouteEvent.busRoute" 
+                    required 
+                    (change)="selectDirection()">
+                <option *ngFor="let route of routes" [value]="route.rt">
+                    {{ route.rtnm }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label for="directions">Direction</label>
+            <select id="directions" 
+                    class="form-control" 
+                    name="directions" 
+                    [(ngModel)]="busRouteEvent.direction" 
+                    required 
+                    (change)="selectBusStops()"
+                    [disabled]="!hasDirections">
+                <option *ngFor="let direction of directions" [value]="direction.dir">
+                    {{ direction.dir }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label for="bus-stops">Bus Stops</label>
+            <select id="bus-stops" 
+                    class="form-control" 
+                    name="bus-stops" 
+                    [(ngModel)]="busRouteEvent.busStop" 
+                    [disabled]="!hasBusStops"
+                    required>
+                <option *ngFor="let busStop of busStops" [value]="busStop.stpid">
+                    {{ busStop.stpnm }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input class="form-control" placeholder="yyyy-mm-dd" name="date" [(ngModel)]="busRouteEvent.date" ngbDatepicker #d="ngbDatepicker"
+            id="date" required>
+            <button class="fa-solid fa-calendar-days" (click)="d.toggle()" type="button"></button>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <ngb-timepicker [(ngModel)]="busRouteEvent.time" name="time"></ngb-timepicker>
+        </div>
+    </div>
+    <div class="col-6 mt-4">
+        <button type="button" class="btn-secondary" (click)="save()" [disabled]="f.invalid">Save</button>
+    </div>
+</form>
