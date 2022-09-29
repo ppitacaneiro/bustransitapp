@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { CalendarDay } from './../../interfaces/CalendarDay';
+import { BusRouteEvent } from './../../interfaces/BusRouteEvent';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 const NUMBER_OF_GRID_ELEMENTS = 42;
 
@@ -7,7 +9,10 @@ const NUMBER_OF_GRID_ELEMENTS = 42;
   templateUrl: './full-calendar.component.html',
   styleUrls: ['./full-calendar.component.scss'],
 })
-export class FullCalendarComponent implements OnInit {
+export class FullCalendarComponent implements OnInit, OnChanges {
+  
+  @Input() busRouteEvent!:BusRouteEvent; 
+  
   monthNames: string[] = [
     'January',
     'February',
@@ -33,7 +38,7 @@ export class FullCalendarComponent implements OnInit {
     'Sunday',
   ];
 
-  daysOfMonth: any[] = [];
+  daysOfMonth: CalendarDay[] = [];
   year!: number;
   month!: number;
   actualMonth!: string;
@@ -52,6 +57,17 @@ export class FullCalendarComponent implements OnInit {
     this.actualYear = actualYear;
     this.today = new Date().getDate();
     this.buildCalendar(this.month, this.year);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const event:BusRouteEvent = changes.busRouteEvent.currentValue;  
+    if (event != undefined) {
+      const day = this.daysOfMonth.find(x => 
+        x.day.dayNumber == event.date.day && 
+        x.day.monthNumber == event.date.month && 
+        x.day.year == event.date.year);
+      if (day) day.events.push(event);
+    }
   }
 
   goToNextMonth() {
@@ -76,16 +92,27 @@ export class FullCalendarComponent implements OnInit {
     this.buildCalendar(this.month, this.year);
   }
 
+  initCalendarDayObject(id:number, index:number) {
+    return {
+      id: id,
+      weekDay: this.DAYS_OF_THE_WEEK[index],
+      day: {
+        weekday: '',
+        dayNumber: 0,
+        month: '',
+        monthNumber: 0,
+        year: 0
+      },
+      events: []
+    }
+  }
+
   buildCalendar(month: number, year: number) {
     let id = 1;
     let index = 0;
     const daysInMonth = this.getDaysInMonth(month, year);
     for (let i = 0; i < NUMBER_OF_GRID_ELEMENTS; i++) {
-      this.daysOfMonth.push({
-        id: id,
-        weekDay: this.DAYS_OF_THE_WEEK[index],
-        day: null,
-      });
+      this.daysOfMonth.push(this.initCalendarDayObject(i,index));
       id++;
       index === this.DAYS_OF_THE_WEEK.length - 1 ? (index = 0) : index++;
     }
@@ -108,6 +135,7 @@ export class FullCalendarComponent implements OnInit {
       weekday: day[0],
       dayNumber: dayWithMonth[2],
       month: dayWithMonth[1],
+      monthNumber: this.month+1,
       year: day[2],
     };
   }
