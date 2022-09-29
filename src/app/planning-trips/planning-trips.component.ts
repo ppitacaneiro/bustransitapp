@@ -1,3 +1,4 @@
+import { BusRouteEvent } from './../interfaces/BusRouteEvent';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanningTripsComponent implements OnInit {
 
+  busRouteEvent!: BusRouteEvent;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  sendBusRouteEvent(busRouteEvent:BusRouteEvent) {
+    this.busRouteEvent = busRouteEvent;
   }
 
 }
