@@ -36,12 +36,21 @@ export class FullCalendarComponent implements OnInit {
   daysOfMonth: any[] = [];
   year!: number;
   month!: number;
+  actualMonth!: string;
+  actualYear!: number;
+  today!: number;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.year = new Date().getFullYear();
-    this.month = new Date().getMonth();
+    const actualMonth = new Date().getMonth();
+    const actualYear = new Date().getFullYear();
+
+    this.year = actualYear;
+    this.month = actualMonth;
+    this.actualMonth = this.monthNames[actualMonth];
+    this.actualYear = actualYear;
+    this.today = new Date().getDate();
     this.buildCalendar(this.month, this.year);
   }
 
