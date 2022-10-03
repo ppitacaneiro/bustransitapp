@@ -1,39 +1,34 @@
-<ng-template #content let-modal>
-    <div class="modal-body">
-        <p>Lorem ipsum dolor sit amet</p>
+<app-spinner *ngIf="!areEventsLoaded"></app-spinner>
+<div *ngIf="areEventsLoaded">
+    <div class="date-info">
+        <h3>{{ monthNames[month] }}</h3>
+        <p>{{ year }}</p>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    <div class="btn-container">
+        <button type="button" class="btn-primary" (click)="goToPreviosMonth()">Previous</button>
+        <button type="button" class="btn-primary" (click)="goToNextMonth()">Next</button>
     </div>
-</ng-template>
-<div class="date-info">
-    <h3>{{ monthNames[month] }}</h3>
-    <p>{{ year }}</p>
-</div>
-<div class="btn-container">
-    <button type="button" class="btn-primary" (click)="goToPreviosMonth()">Previous</button>
-    <button type="button" class="btn-primary" (click)="goToNextMonth()">Next</button>
-</div>
-<div class="table-container">
-    <div class="day-label" *ngFor="let day of DAYS_OF_THE_WEEK">{{ day }}</div>
-</div>
-<div class="table-container">
-    <div class="day" *ngFor="let item of daysOfMonth; let index">
-        <div class="number" *ngIf="item.day.dayNumber !== 0; else notNumberBlock">
-            <span [ngClass]="(item.day.dayNumber == today 
+    <div class="table-container">
+        <div class="day-label" *ngFor="let day of DAYS_OF_THE_WEEK">{{ day }}</div>
+    </div>
+    <div class="table-container">
+        <div class="day" *ngFor="let item of daysOfMonth; let index">
+            <div class="number" *ngIf="item.day.dayNumber !== 0; else notNumberBlock">
+                <span [ngClass]="(item.day.dayNumber == today 
                             && actualMonth == item.day.month 
                             && actualYear == item.day.year) 
                             ? 'day-label-today' : 'day-label'">
-                {{ item.day.dayNumber}}
-            </span>
-            <div *ngIf="item.events.length > 0">
-                <span *ngFor="let event of item.events">
-                    <i class="fa-solid fa-bus bus-icon" (click)="open(content)"></i>
+                    {{ item.day.dayNumber}}
                 </span>
+                <div *ngIf="item.events.length > 0">
+                    <span *ngFor="let event of item.events">
+                        <i class="fa-solid fa-bus bus-icon" (click)="editBusRouteEvent(event)"></i>
+                    </span>
+                </div>
             </div>
+            <ng-template #notNumberBlock>
+                <div class="not-number"></div>
+            </ng-template>
         </div>
-        <ng-template #notNumberBlock>
-            <div class="not-number"></div>
-        </ng-template>
     </div>
 </div>

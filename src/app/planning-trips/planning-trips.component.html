@@ -1,2 +1,5 @@
-<app-full-calendar [busRouteEvent]="busRouteEvent"></app-full-calendar>
-<app-edit-form (busRouteEventEmitter)="sendBusRouteEvent($event)"></app-edit-form>
+<app-full-calendar 
+    (areEventsLoadedEvent)="showEditForm()" (busRouteEventEmitter)="editEvent($event)"></app-full-calendar>
+<app-edit-form 
+    [busRouteEventToEdit]="busRouteEvent"
+    *ngIf="showEdit"></app-edit-form>

@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanningTripsComponent implements OnInit {
 
+  showEdit:boolean = false;
   busRouteEvent!: BusRouteEvent;
 
   constructor() { }
@@ -15,8 +16,12 @@ export class PlanningTripsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  sendBusRouteEvent(busRouteEvent:BusRouteEvent) {
-    this.busRouteEvent = busRouteEvent;
+  showEditForm() {
+    this.showEdit = true;
+  }
+
+  editEvent(event:BusRouteEvent) {
+    this.busRouteEvent = event;
   }
 
 }
