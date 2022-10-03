@@ -1,3 +1,11 @@
+<ng-template #content let-modal>
+    <div class="modal-body">
+        <p>Lorem ipsum dolor sit amet</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
 <div class="date-info">
     <h3>{{ monthNames[month] }}</h3>
     <p>{{ year }}</p>
@@ -20,7 +28,7 @@
             </span>
             <div *ngIf="item.events.length > 0">
                 <span *ngFor="let event of item.events">
-                    <i class="fa-solid fa-bus bus-icon"></i>
+                    <i class="fa-solid fa-bus bus-icon" (click)="open(content)"></i>
                 </span>
             </div>
         </div>
