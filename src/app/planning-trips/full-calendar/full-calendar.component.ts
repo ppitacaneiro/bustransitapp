@@ -1,6 +1,7 @@
 import { CalendarDay } from './../../interfaces/CalendarDay';
 import { BusRouteEvent } from './../../interfaces/BusRouteEvent';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 const NUMBER_OF_GRID_ELEMENTS = 42;
 
@@ -45,7 +46,7 @@ export class FullCalendarComponent implements OnInit, OnChanges {
   actualYear!: number;
   today!: number;
 
-  constructor() {}
+  constructor(private modalService: NgbModal) {}
 
   ngOnInit(): void {
     const actualMonth = new Date().getMonth();
@@ -68,6 +69,12 @@ export class FullCalendarComponent implements OnInit, OnChanges {
         x.day.year == event.date.year);
       if (day) day.events.push(event);
     }
+  }
+
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log(result);
+    });
   }
 
   goToNextMonth() {
