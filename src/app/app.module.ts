@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { GlobalHttpInterceptorService } from './services/interceptors/global-http-interceptor.service';
 import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,8 @@ import {
 } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +26,8 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     NgbModule,
     RouterModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [
     {
