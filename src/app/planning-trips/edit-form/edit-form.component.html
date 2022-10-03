@@ -66,7 +66,11 @@
             <ngb-timepicker [(ngModel)]="busRouteEvent.time" name="time"></ngb-timepicker>
         </div>
     </div>
-    <div class="col-6 mt-4">
-        <button type="button" class="btn-secondary" (click)="save()" [disabled]="f.invalid">Save</button>
+    <div class="col-6 mt-4" *ngIf="!isUpdating">
+        <button type="button" class="btn-secondary" (click)="create()" [disabled]="f.invalid">Save</button>
+    </div>
+    <div class="col-6 mt-4" *ngIf="isUpdating">
+        <button type="button" class="btn-secondary" (click)="update()" [disabled]="f.invalid">Save</button>
+        <button type="button" class="btn-secondary" (click)="deleteBusEvent()">Delete</button>
     </div>
 </form>
