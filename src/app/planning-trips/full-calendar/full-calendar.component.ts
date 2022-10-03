@@ -1,7 +1,7 @@
+import { FirebaseService } from './../../services/firebase.service';
 import { CalendarDay } from './../../interfaces/CalendarDay';
 import { BusRouteEvent } from './../../interfaces/BusRouteEvent';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 const NUMBER_OF_GRID_ELEMENTS = 42;
 
@@ -10,9 +10,10 @@ const NUMBER_OF_GRID_ELEMENTS = 42;
   templateUrl: './full-calendar.component.html',
   styleUrls: ['./full-calendar.component.scss'],
 })
-export class FullCalendarComponent implements OnInit, OnChanges {
+export class FullCalendarComponent implements OnInit {
   
-  @Input() busRouteEvent!:BusRouteEvent; 
+  @Output() areEventsLoadedEvent = new EventEmitter();
+  @Output() busRouteEventEmitter = new EventEmitter();
   
   monthNames: string[] = [
     'January',
@@ -40,41 +41,36 @@ export class FullCalendarComponent implements OnInit, OnChanges {
   ];
 
   daysOfMonth: CalendarDay[] = [];
+  busRouteEvents:BusRouteEvent[] = [];
   year!: number;
   month!: number;
   actualMonth!: string;
   actualYear!: number;
   today!: number;
+  areEventsLoaded:boolean = false;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(
+    private firebaseService: FirebaseService
+  ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     const actualMonth = new Date().getMonth();
     const actualYear = new Date().getFullYear();
-
     this.year = actualYear;
     this.month = actualMonth;
     this.actualMonth = this.monthNames[actualMonth];
     this.actualYear = actualYear;
     this.today = new Date().getDate();
-    this.buildCalendar(this.month, this.year);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const event:BusRouteEvent = changes.busRouteEvent.currentValue;  
-    if (event != undefined) {
-      const day = this.daysOfMonth.find(x => 
-        x.day.dayNumber == event.date.day && 
-        x.day.monthNumber == event.date.month && 
-        x.day.year == event.date.year);
-      if (day) day.events.push(event);
-    }
-  }
-
-  open(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      console.log(result);
-    });
+    
+    await this.firebaseService.getAll()
+    .then(response => {
+      response.subscribe(data => {
+        this.daysOfMonth = [];
+        this.busRouteEvents = data;
+        this.buildCalendar(this.month, this.year);
+      });
+    })
+    .catch(err => console.error(err));
   }
 
   goToNextMonth() {
@@ -115,17 +111,29 @@ export class FullCalendarComponent implements OnInit, OnChanges {
   }
 
   buildCalendar(month: number, year: number) {
-    let id = 1;
     let index = 0;
     const daysInMonth = this.getDaysInMonth(month, year);
     for (let i = 0; i < NUMBER_OF_GRID_ELEMENTS; i++) {
       this.daysOfMonth.push(this.initCalendarDayObject(i,index));
-      id++;
       index === this.DAYS_OF_THE_WEEK.length - 1 ? (index = 0) : index++;
     }
 
     let firstDayIndex = this.getIndexForFirstDay(daysInMonth);
     this.buildDaysInMonth(daysInMonth, firstDayIndex);
+    this.getEventsForDays();
+    this.areEventsLoaded = true;
+    this.areEventsLoadedEvent.emit(true);
+  }
+
+  getEventsForDays() {
+    this.daysOfMonth.forEach(x => {
+      const events = this.busRouteEvents.filter(y => 
+        y.date.day == x.day.dayNumber && 
+        y.date.month == x.day.monthNumber && 
+        y.date.year == x.day.year
+      );
+      if (events) x.events.push(...events);
+    });
   }
 
   buildDaysInMonth(daysInMonth: any, index: number) {
@@ -173,5 +181,9 @@ export class FullCalendarComponent implements OnInit, OnChanges {
       date.setDate(date.getDate() + 1);
     }
     return days;
+  }
+
+  editBusRouteEvent(event:BusRouteEvent) {
+    this.busRouteEventEmitter.emit(event);
   }
 }
