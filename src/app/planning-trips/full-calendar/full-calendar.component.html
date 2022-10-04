@@ -22,7 +22,9 @@
                 </span>
                 <div *ngIf="item.events.length > 0">
                     <span *ngFor="let event of item.events">
-                        <i class="fa-solid fa-bus bus-icon" (click)="editBusRouteEvent(event)"></i>
+                        <i class="fa-solid fa-bus" 
+                           [ngClass]="{'bus-icon': !event.isSelected, 'bus-icon-selected': event.isSelected}" 
+                           (click)="editBusRouteEvent(event)"></i>
                     </span>
                 </div>
             </div>
