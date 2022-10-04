@@ -5,6 +5,7 @@ export interface BusRouteEvent {
   date: DateClass;
   time: Time;
   key?: string;
+  isSelected?: boolean;
 }
 
 export interface DateClass {
