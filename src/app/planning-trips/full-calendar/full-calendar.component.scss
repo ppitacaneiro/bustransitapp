@@ -59,4 +59,10 @@
 
 .bus-icon {
   color: var(--darkred);
+  cursor: pointer;
+}
+
+.bus-icon-selected {
+  color: var(--success);
+  cursor: pointer;
 }
