@@ -184,6 +184,10 @@ export class FullCalendarComponent implements OnInit {
   }
 
   editBusRouteEvent(event:BusRouteEvent) {
-    this.busRouteEventEmitter.emit(event);
+    event.isSelected = !event.isSelected;
+    if (event.isSelected) 
+      this.busRouteEventEmitter.emit(event);
+    else
+      this.busRouteEventEmitter.emit();
   }
 }
