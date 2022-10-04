@@ -1,2 +1,4 @@
 - Solve problem with CORS
 - Going responsive
+- Update README file
+- Documentation
