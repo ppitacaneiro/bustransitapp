@@ -3,7 +3,15 @@ import { DirectionElement } from './../../interfaces/Direction';
 import { Route } from './../../interfaces/Route';
 import { BusTrackerApiService } from './../../services/bus-tracker-api.service';
 import { BusRouteEvent } from './../../interfaces/BusRouteEvent';
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { StopElement } from 'src/app/interfaces/Stop';
 
 @Component({
@@ -17,14 +25,14 @@ export class EditFormComponent implements OnInit, OnChanges {
 
   routes: Route[] = [];
   directions: DirectionElement[] = [];
-  busStops:StopElement[] = [];
-  hasBusStops:boolean = false;
-  hasDirections:boolean = false;
-  hasErrors:boolean = false;
+  busStops: StopElement[] = [];
+  hasBusStops: boolean = false;
+  hasDirections: boolean = false;
+  hasErrors: boolean = false;
   errorMessage!: string;
-  isUpdating:boolean = false;
+  isUpdating: boolean = false;
 
-  busRouteEvent:BusRouteEvent = {
+  busRouteEvent: BusRouteEvent = {
     busRoute: '',
     direction: '',
     busStop: '',
@@ -36,13 +44,14 @@ export class EditFormComponent implements OnInit, OnChanges {
     time: {
       hour: 0,
       minute: 0,
-      second: 0
-    }
+      second: 0,
+    },
+    isSelected: false
   };
-  
+
   constructor(
-    private busTrackerApiService:BusTrackerApiService,
-    private firebaseService:FirebaseService
+    private busTrackerApiService: BusTrackerApiService,
+    private firebaseService: FirebaseService
   ) {}
 
   ngOnInit() {
@@ -61,6 +70,9 @@ export class EditFormComponent implements OnInit, OnChanges {
       this.busRouteEvent.busStop = busRouteEventToEdit.busStop;
       this.busRouteEvent.date = busRouteEventToEdit.date;
       this.busRouteEvent.time = busRouteEventToEdit.time;
+    } else {
+      this.isUpdating = false;
+      this.resetForm();
     }
   }
 
@@ -77,46 +89,71 @@ export class EditFormComponent implements OnInit, OnChanges {
   }
 
   selectDirection() {
-    this.busTrackerApiService.getDirections(this.busRouteEvent.busRoute).subscribe(
-      (response) => {
-        this.directions = response['bustime-response'].directions;
-        this.hasDirections = true;
-      },
-      (error) => {
-        this.hasErrors = true;
-        this.errorMessage = error;
-      }
-    );
+    this.busTrackerApiService
+      .getDirections(this.busRouteEvent.busRoute)
+      .subscribe(
+        (response) => {
+          this.directions = response['bustime-response'].directions;
+          this.hasDirections = true;
+        },
+        (error) => {
+          this.hasErrors = true;
+          this.errorMessage = error;
+        }
+      );
   }
 
   selectBusStops() {
-    this.busTrackerApiService.getStops(this.busRouteEvent.direction,this.busRouteEvent.busRoute).subscribe(
-      (response) => {
-        this.busStops = response['bustime-response'].stops;
-        this.hasBusStops = true;
-      },
-      (error) => {
-        this.hasErrors = true;
-        this.errorMessage = error;
-      }
-    );
+    this.busTrackerApiService
+      .getStops(this.busRouteEvent.direction, this.busRouteEvent.busRoute)
+      .subscribe(
+        (response) => {
+          this.busStops = response['bustime-response'].stops;
+          this.hasBusStops = true;
+        },
+        (error) => {
+          this.hasErrors = true;
+          this.errorMessage = error;
+        }
+      );
   }
 
   create() {
-    this.firebaseService.createEvent(this.busRouteEvent)
+    this.firebaseService
+      .createEvent(this.busRouteEvent)
       .then(() => {})
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }
 
   update() {
-    this.firebaseService.update(this.busRouteEvent.key!,this.busRouteEvent)
+    this.firebaseService
+      .update(this.busRouteEvent.key!, this.busRouteEvent)
       .then(() => {})
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }
 
   deleteBusEvent() {
-    this.firebaseService.delete(this.busRouteEvent.key!)
+    this.firebaseService
+      .delete(this.busRouteEvent.key!)
       .then(() => {})
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
+  }
+
+  resetForm() {
+    this.busRouteEvent = {
+      busRoute: '',
+      direction: '',
+      busStop: '',
+      date: {
+        year: 0,
+        month: 0,
+        day: 0,
+      },
+      time: {
+        hour: 0,
+        minute: 0,
+        second: 0,
+      },
+    };
   }
 }
