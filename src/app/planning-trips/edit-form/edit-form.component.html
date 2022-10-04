@@ -1,5 +1,7 @@
 <app-simple-toast [show]="hasErrors" [message]="errorMessage"></app-simple-toast>
 <h3 class="mt-3">Plain your trip</h3>
+<h5 *ngIf="isUpdating">Edit Trip</h5>
+<h5 *ngIf="!isUpdating">New Trip</h5>
 <form class="row row-cols-sm-auto mt-3" #f="ngForm">
     <div class="col-6">
         <div class="form-group">
